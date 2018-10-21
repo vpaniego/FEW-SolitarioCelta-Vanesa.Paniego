@@ -1,5 +1,6 @@
 package es.upm.miw.SolitarioCelta;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.preferences:
                 startActivity(new Intent(this, SCeltaPreferences.class));
+                return true;
+            case R.id.reiniciar:
+                DialogFragment reiniciarDialogFragment = new SCeltaReiniciarDialogFragment();
+                reiniciarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.reiniciarText));
                 return true;
         }
         return super.onOptionsItemSelected(item);
