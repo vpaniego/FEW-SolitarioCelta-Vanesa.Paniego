@@ -1,15 +1,23 @@
 package es.upm.miw.SolitarioCelta;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final String LOG_TAG = "MiW";
 
 	JuegoCelta mJuego;
     private final String CLAVE_TABLERO = "TABLERO_SOLITARIO_CELTA";
@@ -23,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         {       0,        0, R.id.p52, R.id.p53, R.id.p54,        0,        0},
         {       0,        0, R.id.p62, R.id.p63, R.id.p64,        0,        0}
 	};
+
+    private static final String NOMBRE_FICHERO = "solitarioCelta_MiW.txt";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +104,23 @@ public class MainActivity extends AppCompatActivity {
                 DialogFragment reiniciarDialogFragment = new SCeltaReiniciarDialogFragment();
                 reiniciarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.reiniciarText));
                 return true;
+            case R.id.guardar:
+                Log.i(LOG_TAG, "Click botón Guardar -> Guardar en fichero la partida");
+                FileOutputStream fos;
+                try {  // Añadir al fichero
+                    fos = openFileOutput(NOMBRE_FICHERO, Context.MODE_APPEND); // Memoria interna
+                    fos.write(mJuego.serializaTablero().getBytes());
+                    fos.write('\n');
+                    fos.close();
+                } catch (Exception e) {
+                    Log.e(LOG_TAG, "FILE I/O ERROR: " + e.getMessage());
+                    e.printStackTrace();
+                }
+
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
