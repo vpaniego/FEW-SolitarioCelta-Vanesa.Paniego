@@ -19,6 +19,11 @@
     <string name="txtDialogoReinicioAfirmativo">Sí</string>
     <string name="txtDialogoReinicioNegativo">No</string>
 
+    <string name="guardarText">Guardar</string>
+    <!-- Nombre del Fichero -->
+    <string name="default_NombreFich">solitarioCelta_MiW.txt</string>
+
+
 
     <!-- Diálogo Final -->
     <string name="txtDialogoFinalTitulo">Fin del juego</string>
