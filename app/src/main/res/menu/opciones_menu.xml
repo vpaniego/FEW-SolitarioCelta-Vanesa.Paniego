@@ -15,6 +15,10 @@
         android:icon="@android:drawable/ic_menu_save"
         app:showAsAction="ifRoom|withText" />
     <item
+        android:id="@+id/recuperar"
+        android:orderInCategory="300"
+        android:title="@string/recuperarText"/>
+    <item
         android:id="@+id/preferences"
         android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="300"

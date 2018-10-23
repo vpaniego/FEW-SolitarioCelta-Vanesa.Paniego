@@ -28,6 +28,8 @@ class JuegoCelta {
 
 	private Estado estadoJuego;
 
+	private String partidaInicio;
+
     /**
      * Constructor
      * Inicializa el tablero y el estado del miJuego
@@ -39,6 +41,7 @@ class JuegoCelta {
         tablero[TAMANIO / 2][TAMANIO / 2] = 0;   // posición central
 
 		estadoJuego = Estado.ESTADO_SELECCION_FICHA;
+		partidaInicio = serializaTablero();
 	}
 
     /**
@@ -160,5 +163,9 @@ class JuegoCelta {
         tablero[TAMANIO / 2][TAMANIO / 2] = 0;   // posición central
 
         estadoJuego = Estado.ESTADO_SELECCION_FICHA;
+	}
+
+	public String getPartidaInicio() {
+		return partidaInicio;
 	}
 }
