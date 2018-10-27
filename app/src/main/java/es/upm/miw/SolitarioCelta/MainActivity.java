@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mostrarMejoresResultados() {
-        //startActivity(new Intent(this, MejoresResultadosActivity.class));
+        startActivity(new Intent(this, MejoresResultadosActivity.class));
     }
 
 

@@ -40,13 +40,15 @@
     <string name="txtTextViewFecha">"Fecha: "</string>
     <string name="txtTextViewFichas">"Número de fichas: "</string>
 
-    <string name="listarText">Recuperar partida</string>
+    <string name="listarText">Mejores resultados</string>
     <!-- Mostrar Mejores Resultados -->
     <string name="textDialogoMejoresResultadosTitulo">Mejores resultados</string>
     <string name="textDialogoMejoresResultadosPregunta">¿Desea eliminar los resultados de las partidas?</string>
     <string name="headerNombreJugador">Jugador</string>
     <string name="headerFichas">Fichas</string>
     <string name="headerFecha">Fecha</string>
+
+    <string name="mejoresResultadosText">Mejores resultados</string>
 
     <!-- Diálogo Final -->
     <string name="txtDialogoFinalTitulo">Fin del juego</string>

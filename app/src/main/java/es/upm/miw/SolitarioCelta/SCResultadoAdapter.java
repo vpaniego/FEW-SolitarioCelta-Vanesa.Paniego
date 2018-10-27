@@ -20,6 +20,8 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
     private List<SCResultado> resultados;
     private int resourceId;
 
+    static final String LOG_TAG = "MiW";
+
     public SCResultadoAdapter(@NonNull Context context, int resource, @NonNull List<SCResultado> resultados) {
         super(context, resource, resultados);
         this.context = context;
@@ -50,7 +52,7 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
             tvNumeroFichas.setText("" + resultado.getFichas());
 
             TextView tvFecha = view.findViewById(R.id.tvFecha);
-            tvFecha.setText(String.format("%tF", resultado.getFecha()));
+            tvFecha.setText(String.format("%tc", resultado.getFecha()));
         }
 
         return view;
