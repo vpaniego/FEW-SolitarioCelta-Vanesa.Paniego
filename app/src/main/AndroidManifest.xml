@@ -38,7 +38,8 @@
         </activity>
         <activity
             android:name=".MejoresResultadosActivity"
-            android:label="@string/mejoresResultadosText" >
+            android:label="@string/mejoresResultadosText"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

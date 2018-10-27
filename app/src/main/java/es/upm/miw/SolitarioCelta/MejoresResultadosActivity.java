@@ -28,9 +28,7 @@ public class MejoresResultadosActivity extends AppCompatActivity {
 
         // Se recuperan los datos
         Bundle bundle = this.getIntent().getExtras();
-        if (bundle != null) {
-
-        }
+        if (bundle != null) {       }
 
         resultadosListView = findViewById(R.id.resultadosListView);
         resultadosListView.addHeaderView(getLayoutInflater().inflate(R.layout.cabecera_resultados, null));
