@@ -1,8 +1,13 @@
 package es.upm.miw.SolitarioCelta;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import es.upm.miw.db.RepositorioSCResultado;
@@ -20,7 +25,6 @@ public class MejoresResultadosActivity extends AppCompatActivity {
 
         resultadoRepository = new RepositorioSCResultado(getApplicationContext());
 
-        // Mostrar el icono back en la ActionBar
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -28,7 +32,8 @@ public class MejoresResultadosActivity extends AppCompatActivity {
 
         // Se recuperan los datos
         Bundle bundle = this.getIntent().getExtras();
-        if (bundle != null) {       }
+        if (bundle != null) {
+        }
 
         resultadosListView = findViewById(R.id.resultadosListView);
         resultadosListView.addHeaderView(getLayoutInflater().inflate(R.layout.cabecera_resultados, null));
@@ -36,8 +41,32 @@ public class MejoresResultadosActivity extends AppCompatActivity {
                 this,
                 R.layout.item_resultados,
                 resultadoRepository.getAll()));
+        //para que cada vez que haya un cambio el resultadosListView se actualice
+        ((BaseAdapter) resultadosListView.getAdapter()).notifyDataSetChanged();
 
         setResult(RESULT_OK);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.opciones_resultados_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.eliminar:
+                mostrarEliminar();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void mostrarEliminar() {
+        DialogFragment eliminarDialogFragment = new SCeltaEliminarDialogFragment();
+        eliminarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.eliminarText));
+    }
+
 
 }

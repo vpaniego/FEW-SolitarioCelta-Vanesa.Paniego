@@ -57,6 +57,18 @@ public class RepositorioSCResultado extends SQLiteOpenHelper {
         return db.insert(tablaSCResultado.TABLE_NAME, null, valores);
     }
 
+    public int removeAll() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int deleted = db.delete(tablaSCResultado.TABLE_NAME, "1", null);
+        db.close();
+
+        return deleted;
+
+    }
+
+
     public ArrayList<SCResultado> getAll() {
         String consultaSQL = "SELECT * FROM " + tablaSCResultado.TABLE_NAME;
         ArrayList<SCResultado> listaSCResultado = new ArrayList<>();
@@ -83,5 +95,8 @@ public class RepositorioSCResultado extends SQLiteOpenHelper {
 
         return listaSCResultado;
     }
+
+
+
 
 }

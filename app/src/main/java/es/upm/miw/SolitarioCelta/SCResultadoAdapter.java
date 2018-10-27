@@ -53,6 +53,9 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
 
             TextView tvFecha = view.findViewById(R.id.tvFecha);
             tvFecha.setText(String.format("%tc", resultado.getFecha()));
+
+            // fire the event
+            this.notifyDataSetChanged();
         }
 
         return view;
