@@ -13,7 +13,7 @@
 * Recupera el estado de una partida guardada. Si se ha iniciado una partida y se quiere recuperar la partidad guardada, se solicita confirmación.
 
 #### Guardar puntuación
-* Al finalizar cada partida se guardar la información necesaria para generar un listado de resultados. En el listado se muestra el nombre del jugador, el número de piezas que quedaron en el tablero al finalizar la partida y el día y hora de la partida. La información se almacena en una base de datos.
+* Al finalizar cada partida se guardar la información necesaria para generar un listado de resultados. En el listado se muestra el nombre del jugador (si el jugador ha modificado las preferencias del nombre, se guarda ese, si no uno por defecto), el número de piezas que quedaron en el tablero al finalizar la partida y el día y hora de la partida. La información se almacena en una base de datos.
 
 #### Mejores resultados
 * Esta opción muestra el histórico con los mejores resultados obtenidos ordenados por número de fichas de menor a mayor. Incluye una opción -con confirmación- para eliminar todos los resultados guardados.
