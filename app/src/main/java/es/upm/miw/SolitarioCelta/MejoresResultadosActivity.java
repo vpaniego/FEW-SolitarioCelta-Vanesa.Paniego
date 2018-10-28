@@ -13,7 +13,8 @@ import es.upm.miw.db.RepositorioSCResultado;
 public class MejoresResultadosActivity extends AppCompatActivity {
 
     private ListView resultadosListView;
-    private SCResultadoAdapter adapter;
+
+    SCResultadoAdapter adapter;
 
     RepositorioSCResultado resultadoRepository;
 
@@ -52,7 +53,6 @@ public class MejoresResultadosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.eliminar:
                 mostrarEliminar();
-                adapter.notifyDataSetChanged();
                 return true;
 
         }

@@ -29,6 +29,7 @@ public class SCeltaEliminarDialogFragment extends DialogFragment {
                                 String messageEliminados = "Eliminados " + String.valueOf(activity.resultadoRepository.removeAll()) + " resultados";
                                 Toast.makeText(activity.getBaseContext(), messageEliminados,
                                         Toast.LENGTH_SHORT).show();
+                                activity.adapter.removeAllFromView();
                             }
                         }
                 )
