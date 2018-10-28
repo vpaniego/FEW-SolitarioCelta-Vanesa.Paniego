@@ -26,11 +26,8 @@ import es.upm.miw.db.SCResultado;
 public class MainActivity extends AppCompatActivity {
 
     static final String LOG_TAG = "MiW";
-    static final String KEY_CLIENTE = "MiW_clave_Resultado";
 
     RepositorioSCResultado resultadoRepository;
-    ArrayList<SCResultado> resultados;
-
 
     JuegoCelta mJuego;
     private final String CLAVE_TABLERO = "TABLERO_SOLITARIO_CELTA";
@@ -50,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mJuego = new JuegoCelta();
+
+        if (recuperarNombreJugador(null) == null) {
+            mostrarPreferencias();
+        }
 
         mostrarTablero();
     }
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void guardarPartidaBBDD() {
         resultadoRepository = new RepositorioSCResultado(getApplicationContext());
+
         long id = resultadoRepository.add(recuperarNombreJugador(), new Date(), mJuego.contarNumeroFichas());
         Log.i(LOG_TAG, "Número resultado = " + String.valueOf(id));
     }
@@ -210,6 +212,12 @@ public class MainActivity extends AppCompatActivity {
     private String recuperarNombreJugador() {
         String nombreJugadorDefecto = this.getResources().getString(R.string.default_NombreJugador);
         Log.i(LOG_TAG, "nombreJugadorDefecto = " + nombreJugadorDefecto);
+        recuperarNombreJugador(nombreJugadorDefecto);
         return nombreJugadorDefecto;
+    }
+
+    private String recuperarNombreJugador(String defaultPlayerName) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPref.getString(getResources().getString(R.string.preferencesKeyNombreJugador), defaultPlayerName);
     }
 }
