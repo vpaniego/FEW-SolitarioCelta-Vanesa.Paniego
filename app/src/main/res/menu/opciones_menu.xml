@@ -19,14 +19,18 @@
         android:orderInCategory="300"
         android:title="@string/recuperarText"/>
     <item
+        android:id="@+id/listar"
+        android:orderInCategory="400"
+        android:title="@string/listarText"/>
+    <item
         android:id="@+id/preferences"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:orderInCategory="300"
+        android:orderInCategory="500"
         android:title="@string/preferencesText"/>
     <item
         android:id="@+id/menuAbout"
         android:icon="@android:drawable/ic_menu_info_details"
-        android:orderInCategory="400"
+        android:orderInCategory="600"
         android:title="@string/aboutText"/>
 
 </menu>

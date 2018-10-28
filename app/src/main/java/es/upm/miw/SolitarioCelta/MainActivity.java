@@ -3,7 +3,9 @@ package es.upm.miw.SolitarioCelta;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,10 +17,20 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
+
+import es.upm.miw.db.RepositorioSCResultado;
+import es.upm.miw.db.SCResultado;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String LOG_TAG = "MiW";
+    static final String LOG_TAG = "MiW";
+    static final String KEY_CLIENTE = "MiW_clave_Resultado";
+
+    RepositorioSCResultado resultadoRepository;
+    ArrayList<SCResultado> resultados;
+
 
     JuegoCelta mJuego;
     private final String CLAVE_TABLERO = "TABLERO_SOLITARIO_CELTA";
@@ -38,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mJuego = new JuegoCelta();
+
         mostrarTablero();
     }
 
@@ -55,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         mostrarTablero();
         if (mJuego.juegoTerminado()) {
+            guardarPartidaBBDD();
             new AlertDialogFragment().show(getFragmentManager(), "ALERT DIALOG");
         }
     }
@@ -94,14 +108,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuAbout:
-                startActivity(new Intent(this, About.class));
+                mostrarAbout();
                 return true;
             case R.id.preferences:
-                startActivity(new Intent(this, SCeltaPreferences.class));
+                mostrarPreferencias();
                 return true;
             case R.id.reiniciar:
-                DialogFragment reiniciarDialogFragment = new SCeltaReiniciarDialogFragment();
-                reiniciarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.reiniciarText));
+                mostrarDialogoReiniciar();
                 return true;
             case R.id.guardar:
                 guardarPartida();
@@ -109,9 +122,30 @@ public class MainActivity extends AppCompatActivity {
             case R.id.recuperar:
                 recuperarPartida();
                 return true;
+            case R.id.listar:
+                mostrarMejoresResultados();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void mostrarAbout() {
+        startActivity(new Intent(this, About.class));
+    }
+
+    private void mostrarPreferencias() {
+        startActivity(new Intent(this, SCeltaPreferences.class));
+    }
+
+    private void mostrarDialogoReiniciar() {
+        DialogFragment reiniciarDialogFragment = new SCeltaReiniciarDialogFragment();
+        reiniciarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.reiniciarText));
+    }
+
+    private void mostrarMejoresResultados() {
+        startActivity(new Intent(this, MejoresResultadosActivity.class));
+    }
+
 
     private void guardarPartida() {
         guardarPartidaEnFichero();
@@ -163,9 +197,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void guardarPartidaBBDD() {
+        resultadoRepository = new RepositorioSCResultado(getApplicationContext());
+        long id = resultadoRepository.add(recuperarNombreJugador(), new Date(), mJuego.contarNumeroFichas());
+        Log.i(LOG_TAG, "Número resultado = " + String.valueOf(id));
+    }
+
     public String recuperarNombreFichero() {
         return this.getResources().getString(R.string.default_NombreFich);
     }
 
-
+    private String recuperarNombreJugador() {
+        String nombreJugadorDefecto = this.getResources().getString(R.string.default_NombreJugador);
+        Log.i(LOG_TAG, "nombreJugadorDefecto = " + nombreJugadorDefecto);
+        return nombreJugadorDefecto;
+    }
 }

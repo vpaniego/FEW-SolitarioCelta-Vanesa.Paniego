@@ -31,7 +31,29 @@
     <string name="txtDialogoRecuperarAfirmativo">Sí</string>
     <string name="txtDialogoRecuperarNegativo">No</string>
 
+    <!-- Guardar resultado final partida -->
+    <string name="preferencesKeyNombreJugador">KEY_NOMBRE_JUGADOR</string>
+    <string name="default_NombreJugador">Jugador</string>
 
+    <string name="txtTextViewId">"Id: "</string>
+    <string name="txtTextViewNombre">"Nombre: "</string>
+    <string name="txtTextViewFecha">"Fecha: "</string>
+    <string name="txtTextViewFichas">"Número de fichas: "</string>
+
+    <string name="listarText">Mejores resultados</string>
+    <!-- Mostrar Mejores Resultados -->
+    <string name="textDialogoMejoresResultadosTitulo">Mejores resultados</string>
+    <string name="headerNombreJugador">Jugador</string>
+    <string name="headerFichas">Fichas</string>
+    <string name="headerFecha">Fecha</string>
+
+    <string name="mejoresResultadosText">Mejores resultados</string>
+    <string name="eliminarText">Eliminar resultados</string>
+    <!-- Dialogo Eliminar Resultados -->
+    <string name="txtDialogoEliminarTitulo">Eliminar resultados</string>
+    <string name="txtDialogoEliminarPregunta">¿Desea eliminar los resultados de las partidas jugadas?</string>
+    <string name="txtDialogoEliminarAfirmativo">Sí</string>
+    <string name="txtDialogoEliminarNegativo">No</string>
 
     <!-- Diálogo Final -->
     <string name="txtDialogoFinalTitulo">Fin del juego</string>
