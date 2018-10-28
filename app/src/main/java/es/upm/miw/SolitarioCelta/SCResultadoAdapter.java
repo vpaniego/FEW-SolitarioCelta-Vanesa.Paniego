@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import es.upm.miw.db.SCResultado;
@@ -50,18 +52,21 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
             tvNumeroFichas.setText("" + resultado.getFichas());
 
             TextView tvFecha = view.findViewById(R.id.tvFecha);
-            tvFecha.setText(String.format("%tc", resultado.getFecha()));
+            tvFecha.setText(format(resultado.getFecha()));
 
-            // fire the event
-            //this.notifyDataSetChanged();
         }
 
         return view;
     }
 
-    public void refreshEvents(List<SCResultado> resultados) {
+    public String format(Date fechaResultado){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return sdf.format(fechaResultado);
+    }
+
+    public void refreshEvents(List<SCResultado> nuevoResultados) {
         this.resultados.clear();
-        this.resultados.addAll(resultados);
+        this.resultados.addAll(nuevoResultados);
         notifyDataSetChanged();
     }
 }

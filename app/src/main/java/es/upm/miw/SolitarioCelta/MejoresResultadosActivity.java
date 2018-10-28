@@ -13,6 +13,7 @@ import es.upm.miw.db.RepositorioSCResultado;
 public class MejoresResultadosActivity extends AppCompatActivity {
 
     private ListView resultadosListView;
+    private SCResultadoAdapter adapter;
 
     RepositorioSCResultado resultadoRepository;
 
@@ -23,25 +24,23 @@ public class MejoresResultadosActivity extends AppCompatActivity {
 
         resultadoRepository = new RepositorioSCResultado(getApplicationContext());
 
+        Bundle bundle = this.getIntent().getExtras();
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // Se recuperan los datos
-        Bundle bundle = this.getIntent().getExtras();
-        if (bundle != null) {
-        }
-
         resultadosListView = findViewById(R.id.resultadosListView);
-        resultadosListView.addHeaderView(getLayoutInflater().inflate(R.layout.cabecera_resultados, null));
-        SCResultadoAdapter scResultadoAdapter = new SCResultadoAdapter(
+        adapter = new SCResultadoAdapter(
                 this,
-                R.layout.item_resultados,
+                R.layout.listado_resultados,
                 resultadoRepository.getAllOrderByNumFichas());
-        resultadosListView.setAdapter(scResultadoAdapter);
+
+        resultadosListView.setAdapter(adapter);
         //para que cada vez que haya un cambio el resultadosListView se actualice
-        scResultadoAdapter.refreshEvents(resultadoRepository.getAllOrderByNumFichas());
+        adapter.refreshEvents(resultadoRepository.getAllOrderByNumFichas());
+        //adapter.notifyDataSetChanged();
 
         setResult(RESULT_OK);
     }
@@ -56,6 +55,9 @@ public class MejoresResultadosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.eliminar:
                 mostrarEliminar();
+                //resultadoRepository.getAllOrderByNumFichas();
+                //adapter.notifyDataSetChanged();
+                adapter.refreshEvents(resultadoRepository.getAllOrderByNumFichas());
                 return true;
 
         }
