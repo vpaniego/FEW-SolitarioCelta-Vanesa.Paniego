@@ -3,9 +3,7 @@ package es.upm.miw.SolitarioCelta;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,20 +15,15 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Date;
 
 import es.upm.miw.db.RepositorioSCResultado;
-import es.upm.miw.db.SCResultado;
 
 public class MainActivity extends AppCompatActivity {
 
     static final String LOG_TAG = "MiW";
-    static final String KEY_CLIENTE = "MiW_clave_Resultado";
 
     RepositorioSCResultado resultadoRepository;
-    ArrayList<SCResultado> resultados;
-
 
     JuegoCelta mJuego;
     private final String CLAVE_TABLERO = "TABLERO_SOLITARIO_CELTA";
@@ -142,11 +135,6 @@ public class MainActivity extends AppCompatActivity {
         reiniciarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.reiniciarText));
     }
 
-    private void mostrarMejoresResultados() {
-        startActivity(new Intent(this, MejoresResultadosActivity.class));
-    }
-
-
     private void guardarPartida() {
         guardarPartidaEnFichero();
         Toast.makeText(this, getString(R.string.guardadoText),
@@ -197,19 +185,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public String recuperarNombreFichero() {
+        return this.getResources().getString(R.string.default_NombreFich);
+    }
+
     private void guardarPartidaBBDD() {
         resultadoRepository = new RepositorioSCResultado(getApplicationContext());
         long id = resultadoRepository.add(recuperarNombreJugador(), new Date(), mJuego.contarNumeroFichas());
         Log.i(LOG_TAG, "Número resultado = " + String.valueOf(id));
     }
 
-    public String recuperarNombreFichero() {
-        return this.getResources().getString(R.string.default_NombreFich);
-    }
-
     private String recuperarNombreJugador() {
         String nombreJugadorDefecto = this.getResources().getString(R.string.default_NombreJugador);
         Log.i(LOG_TAG, "nombreJugadorDefecto = " + nombreJugadorDefecto);
         return nombreJugadorDefecto;
+    }
+
+    private void mostrarMejoresResultados() {
+        startActivity(new Intent(this, MejoresResultadosActivity.class));
     }
 }

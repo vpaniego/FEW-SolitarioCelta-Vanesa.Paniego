@@ -44,7 +44,6 @@ public class RepositorioSCResultado extends SQLiteOpenHelper {
         return DatabaseUtils.queryNumEntries(db, tablaSCResultado.TABLE_NAME);
     }
 
-
     public long add(String nombre, Date fecha, int fichas) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -67,7 +66,6 @@ public class RepositorioSCResultado extends SQLiteOpenHelper {
         return deleted;
 
     }
-
 
     public ArrayList<SCResultado> getAll() {
         String consultaSQL = "SELECT * FROM " + tablaSCResultado.TABLE_NAME;
@@ -122,9 +120,4 @@ public class RepositorioSCResultado extends SQLiteOpenHelper {
 
         return listaSCResultado;
     }
-
-
-
-
-
 }
