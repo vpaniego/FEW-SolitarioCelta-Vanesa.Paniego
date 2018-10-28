@@ -96,6 +96,34 @@ public class RepositorioSCResultado extends SQLiteOpenHelper {
         return listaSCResultado;
     }
 
+    public ArrayList<SCResultado> getAllOrderByNumFichas() {
+        String consultaSQL = "SELECT * FROM " + tablaSCResultado.TABLE_NAME + " ORDER BY " + tablaSCResultado.COL_NAME_FICHAS + " ASC ";
+        ArrayList<SCResultado> listaSCResultado = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(consultaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                SCResultado resultado = new SCResultado(
+                        cursor.getInt(cursor.getColumnIndex(tablaSCResultado.COL_NAME_ID)),
+                        cursor.getString(cursor.getColumnIndex(tablaSCResultado.COL_NAME_NOMBRE)),
+                        new Date(cursor.getLong(cursor.getColumnIndex(tablaSCResultado.COL_NAME_FECHA))),
+                        cursor.getInt(cursor.getColumnIndex(tablaSCResultado.COL_NAME_FICHAS))
+                );
+
+                listaSCResultado.add(resultado);
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        db.close();
+
+        return listaSCResultado;
+    }
+
+
 
 
 

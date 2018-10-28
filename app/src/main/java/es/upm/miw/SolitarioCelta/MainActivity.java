@@ -199,9 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void guardarPartidaBBDD() {
         resultadoRepository = new RepositorioSCResultado(getApplicationContext());
-        if (recuperarNombreJugador() == null) {
-            mostrarPreferencias();
-        }
+        mostrarPreferencias();
         long id = resultadoRepository.add(recuperarNombreJugador(), new Date(), mJuego.contarNumeroFichas());
         Log.i(LOG_TAG, "Número resultado = " + String.valueOf(id));
     }
@@ -213,9 +211,8 @@ public class MainActivity extends AppCompatActivity {
     private String recuperarNombreJugador() {
         String nombreJugadorDefecto = this.getResources().getString(R.string.default_NombreJugador);
         Log.i(LOG_TAG, "nombreJugadorDefecto = " + nombreJugadorDefecto);
-        /*SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        return sharedPref.getString(getResources().getString(R.string.preferencesKeyNombreJugador), nombreJugadorDefecto);*/
-        return nombreJugadorDefecto;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPref.getString(getResources().getString(R.string.preferencesKeyNombreJugador), nombreJugadorDefecto);
     }
 
 

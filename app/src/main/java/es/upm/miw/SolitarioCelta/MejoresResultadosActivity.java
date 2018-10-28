@@ -4,10 +4,8 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import es.upm.miw.db.RepositorioSCResultado;
@@ -37,12 +35,13 @@ public class MejoresResultadosActivity extends AppCompatActivity {
 
         resultadosListView = findViewById(R.id.resultadosListView);
         resultadosListView.addHeaderView(getLayoutInflater().inflate(R.layout.cabecera_resultados, null));
-        resultadosListView.setAdapter(new SCResultadoAdapter(
+        SCResultadoAdapter scResultadoAdapter = new SCResultadoAdapter(
                 this,
                 R.layout.item_resultados,
-                resultadoRepository.getAll()));
+                resultadoRepository.getAllOrderByNumFichas());
+        resultadosListView.setAdapter(scResultadoAdapter);
         //para que cada vez que haya un cambio el resultadosListView se actualice
-        ((BaseAdapter) resultadosListView.getAdapter()).notifyDataSetChanged();
+        scResultadoAdapter.refreshEvents(resultadoRepository.getAllOrderByNumFichas());
 
         setResult(RESULT_OK);
     }
@@ -67,6 +66,4 @@ public class MejoresResultadosActivity extends AppCompatActivity {
         DialogFragment eliminarDialogFragment = new SCeltaEliminarDialogFragment();
         eliminarDialogFragment.show(getFragmentManager(), String.valueOf(R.string.eliminarText));
     }
-
-
 }

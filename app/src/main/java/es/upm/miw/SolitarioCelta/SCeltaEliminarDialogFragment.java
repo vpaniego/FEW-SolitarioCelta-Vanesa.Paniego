@@ -6,15 +6,16 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class SCeltaEliminarDialogFragment extends DialogFragment {
 
     static final String LOG_TAG = "MiW";
 
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		final MejoresResultadosActivity activity = (MejoresResultadosActivity) getActivity();
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final MejoresResultadosActivity activity = (MejoresResultadosActivity) getActivity();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder
@@ -25,8 +26,9 @@ public class SCeltaEliminarDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                int eliminados = activity.resultadoRepository.removeAll();
-                                Log.i(LOG_TAG, "Número de resultados eliminados = " + String.valueOf(eliminados));
+                                String messageEliminados = "Eliminados " + String.valueOf(activity.resultadoRepository.removeAll()) + " resultados";
+                                Toast.makeText(activity.getBaseContext(), messageEliminados,
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                 )
@@ -40,6 +42,6 @@ public class SCeltaEliminarDialogFragment extends DialogFragment {
                         }
                 );
 
-		return builder.create();
-	}
+        return builder.create();
+    }
 }

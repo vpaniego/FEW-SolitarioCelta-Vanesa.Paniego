@@ -20,8 +20,6 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
     private List<SCResultado> resultados;
     private int resourceId;
 
-    static final String LOG_TAG = "MiW";
-
     public SCResultadoAdapter(@NonNull Context context, int resource, @NonNull List<SCResultado> resultados) {
         super(context, resource, resultados);
         this.context = context;
@@ -55,9 +53,15 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
             tvFecha.setText(String.format("%tc", resultado.getFecha()));
 
             // fire the event
-            this.notifyDataSetChanged();
+            //this.notifyDataSetChanged();
         }
 
         return view;
+    }
+
+    public void refreshEvents(List<SCResultado> resultados) {
+        this.resultados.clear();
+        this.resultados.addAll(resultados);
+        notifyDataSetChanged();
     }
 }
