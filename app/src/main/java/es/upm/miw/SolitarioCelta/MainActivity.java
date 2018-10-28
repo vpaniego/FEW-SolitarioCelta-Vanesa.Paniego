@@ -17,11 +17,9 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Date;
 
 import es.upm.miw.db.RepositorioSCResultado;
-import es.upm.miw.db.SCResultado;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     RepositorioSCResultado resultadoRepository;
 
     JuegoCelta mJuego;
+
     private final String CLAVE_TABLERO = "TABLERO_SOLITARIO_CELTA";
 
     private final int[][] ids = {
@@ -47,10 +46,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mJuego = new JuegoCelta();
-
-        if (recuperarNombreJugador(null) == null) {
-            mostrarPreferencias();
-        }
 
         mostrarTablero();
     }
@@ -147,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, MejoresResultadosActivity.class));
     }
 
-
     private void guardarPartida() {
         guardarPartidaEnFichero();
         Toast.makeText(this, getString(R.string.guardadoText),
@@ -210,14 +204,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String recuperarNombreJugador() {
-        String nombreJugadorDefecto = this.getResources().getString(R.string.default_NombreJugador);
-        Log.i(LOG_TAG, "nombreJugadorDefecto = " + nombreJugadorDefecto);
-        recuperarNombreJugador(nombreJugadorDefecto);
-        return nombreJugadorDefecto;
-    }
-
-    private String recuperarNombreJugador(String defaultPlayerName) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        return sharedPref.getString(getResources().getString(R.string.preferencesKeyNombreJugador), defaultPlayerName);
+        String nombreJugador =  sharedPref.getString(getResources().getString(R.string.preferencesKeyNombreJugador), getResources().getString(R.string.preferencesDefaultNombreJugador));
+        Log.i(LOG_TAG, "Nombre Jugador = " + nombreJugador);
+
+        return nombreJugador;
     }
 }
