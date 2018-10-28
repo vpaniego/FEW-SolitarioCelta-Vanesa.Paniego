@@ -43,7 +43,7 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
 
         SCResultado resultado = resultados.get(position);
 
-        if(resultado != null) {
+        if (resultado != null) {
 
             TextView tvNombreJugador = view.findViewById(R.id.tvNombreJugador);
             tvNombreJugador.setText(resultado.getNombre());
@@ -59,8 +59,13 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
         return view;
     }
 
-    public String format(Date fechaResultado){
+    public String format(Date fechaResultado) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return sdf.format(fechaResultado);
+    }
+
+    public void removeAllFromView() {
+        this.resultados.clear();
+        notifyDataSetChanged();
     }
 }
