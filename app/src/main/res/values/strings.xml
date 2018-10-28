@@ -32,8 +32,8 @@
     <string name="txtDialogoRecuperarNegativo">No</string>
 
     <!-- Guardar resultado final partida -->
-    <string name="preferencesKeyNombreJugador">KEY_NOMBRE_JUGADOR</string>
-    <string name="default_NombreJugador">Jugador</string>
+    <string name="preferencesKeyNombreJugador">playerName</string>
+    <string name="preferencesDefaultNombreJugador">JugadorSolitario</string>
 
     <string name="txtTextViewId">"Id: "</string>
     <string name="txtTextViewNombre">"Nombre: "</string>

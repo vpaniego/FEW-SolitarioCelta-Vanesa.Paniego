@@ -3,7 +3,9 @@ package es.upm.miw.SolitarioCelta;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     RepositorioSCResultado resultadoRepository;
 
     JuegoCelta mJuego;
+
     private final String CLAVE_TABLERO = "TABLERO_SOLITARIO_CELTA";
 
     private final int[][] ids = {
@@ -191,14 +194,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void guardarPartidaBBDD() {
         resultadoRepository = new RepositorioSCResultado(getApplicationContext());
+
         long id = resultadoRepository.add(recuperarNombreJugador(), new Date(), mJuego.contarNumeroFichas());
         Log.i(LOG_TAG, "Número resultado = " + String.valueOf(id));
     }
 
     private String recuperarNombreJugador() {
-        String nombreJugadorDefecto = this.getResources().getString(R.string.default_NombreJugador);
-        Log.i(LOG_TAG, "nombreJugadorDefecto = " + nombreJugadorDefecto);
-        return nombreJugadorDefecto;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String nombreJugador = sharedPref.getString(getResources().getString(R.string.preferencesKeyNombreJugador), getResources().getString(R.string.preferencesDefaultNombreJugador));
+        Log.i(LOG_TAG, "Nombre Jugador = " + nombreJugador);
+
+        return nombreJugador;
     }
 
     private void mostrarMejoresResultados() {
