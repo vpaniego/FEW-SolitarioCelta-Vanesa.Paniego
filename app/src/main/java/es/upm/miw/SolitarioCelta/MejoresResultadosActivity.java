@@ -38,10 +38,7 @@ public class MejoresResultadosActivity extends AppCompatActivity {
                 resultadoRepository.getAllOrderByNumFichas());
 
         resultadosListView.setAdapter(adapter);
-        //para que cada vez que haya un cambio el resultadosListView se actualice
-        adapter.refreshEvents(resultadoRepository.getAllOrderByNumFichas());
-        //adapter.notifyDataSetChanged();
-
+        adapter.notifyDataSetChanged();
         setResult(RESULT_OK);
     }
 
@@ -55,9 +52,7 @@ public class MejoresResultadosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.eliminar:
                 mostrarEliminar();
-                //resultadoRepository.getAllOrderByNumFichas();
-                //adapter.notifyDataSetChanged();
-                adapter.refreshEvents(resultadoRepository.getAllOrderByNumFichas());
+                adapter.notifyDataSetChanged();
                 return true;
 
         }

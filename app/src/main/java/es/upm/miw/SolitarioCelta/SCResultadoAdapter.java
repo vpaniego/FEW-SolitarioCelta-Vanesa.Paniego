@@ -63,10 +63,4 @@ public class SCResultadoAdapter extends ArrayAdapter<SCResultado> {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return sdf.format(fechaResultado);
     }
-
-    public void refreshEvents(List<SCResultado> nuevoResultados) {
-        this.resultados.clear();
-        this.resultados.addAll(nuevoResultados);
-        notifyDataSetChanged();
-    }
 }
